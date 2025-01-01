@@ -13,6 +13,8 @@ md.parse("![Rust](https://example.com/example.png)").render();
 // <p><img src="https://example.com/example.png" alt="Rust" loading="lazy"></p>
 ```
 
+See the [tests](./tests/lib.rs) for more examples.
+
 ## Specification
 
 - [MDN: HTMLImageElement: loading property](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading)
