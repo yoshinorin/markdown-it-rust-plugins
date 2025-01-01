@@ -35,8 +35,8 @@ impl CoreRule for LazyLoadImageRule {
 
 #[derive(Debug)]
 pub struct LazyLoadImage {
-    cmark_image: Image,
-    loading: String,
+    pub cmark_image: Image,
+    pub loading: String,
 }
 
 impl NodeValue for LazyLoadImage {
