@@ -1,3 +1,12 @@
+//! A [markdown_it] plugin to add lazy to image tags' loading property
+//!
+//! ```
+//! let parser = &mut markdown_it::MarkdownIt::new();
+//! markdown_it::plugins::cmark::add(parser);
+//! markdown_it_lazyload::add(parser);
+//! let node = parser.parse("![Rust](https://example.com/example.png)");
+//! ```
+
 use markdown_it::{
     parser::core::CoreRule,
     plugins::cmark::{self, inline::image::Image},
@@ -50,6 +59,7 @@ impl NodeValue for LazyLoadImage {
     }
 }
 
+/// add lazyload plugin to the parser
 pub fn add(md: &mut MarkdownIt) {
     md.add_rule::<LazyLoadImageRule>().after_all();
 }
