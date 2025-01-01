@@ -1,6 +1,8 @@
 # markdown-it-lazyload
 
-Add `lazy` to [`loading`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) property in `<img>` tag.
+[![markdown-it-lazyload](https://img.shields.io/crates/v/markdown-it-lazyload.svg)](https://crates.io/crates/markdown-it-lazyload) [![markdown-it-lazyload](https://docs.rs/markdown-it-lazyload/badge.svg)](https://docs.rs/markdown-it-lazyload)
+
+A [markdown-it.rs](https://crates.io/crates/markdown-it) plugin to add `lazy` to [`loading`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) property in `<img>` tag.
 
 ## Usage
 
