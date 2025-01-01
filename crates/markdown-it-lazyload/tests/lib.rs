@@ -32,6 +32,16 @@ fn test_inline_full_url_render() {
 }
 
 #[test]
+fn test_title_render() {
+    let input = r#"![Rust](https://example.com/example.png 'img_title')"#;
+    let out = MARKDOWN_IT.parse(input).render();
+    let expected = r#"<p><img src="https://example.com/example.png" alt="Rust" title="img_title" loading="lazy"></p>
+"#;
+
+    assert_eq!(out, expected);
+}
+
+#[test]
 fn test_add_plugin_before_cmark_render() {
     let input = r#"![Rust](https://example.com/example.png)"#;
     let out = ADDED_LAZYLOAD_RULE_BEFORE_CMARK_MARKDOWN_IT
