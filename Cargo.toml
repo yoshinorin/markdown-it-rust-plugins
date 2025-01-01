@@ -1,0 +1,11 @@
+[workspace]
+members = ["crates/*"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+authors = ["yoshinorin"]
+repository = "https://github.com/yoshinorin/markdown-it-rust-plugins"
+
+[workspace.dependencies]
+markdown-it = { version = "0.6.1", default-features = false }

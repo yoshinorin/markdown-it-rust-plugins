@@ -1,0 +1,14 @@
+[package]
+name = "markdown-it-lazyload"
+version = "0.1.0"
+description = "A markdown-it plugin to add lazy to image tags' loading property"
+readme = "README.md"
+license = "Apache-2.0"
+authors = { workspace = true }
+edition = { workspace = true }
+repository = { workspace = true }
+keywords = ["markdown", "markdown-it"]
+categories = ["encoding", "parsing", "text-processing"]
+
+[dependencies]
+markdown-it = { workspace = true }
