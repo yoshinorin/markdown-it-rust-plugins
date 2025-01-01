@@ -43,5 +43,8 @@ jobs:
           rustup --version
           rustc --version
           cargo --version
+      - name: Set up clippy
+        run: |
+          rustup component add clippy
       - name: Run clippy
         run: cargo clippy
