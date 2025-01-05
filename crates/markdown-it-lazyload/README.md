@@ -11,7 +11,7 @@ let mut parser = markdown_it::MarkdownIt::new();
 markdown_it::plugins::cmark::add(parser);
 markdown_it_lazyload::add(parser);
 
-md.parse("![Rust](https://example.com/example.png)").render();
+parser.parse("![Rust](https://example.com/example.png)").render();
 // <p><img src="https://example.com/example.png" alt="Rust" loading="lazy"></p>
 ```
 
