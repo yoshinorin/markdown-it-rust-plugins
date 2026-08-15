@@ -9,6 +9,8 @@ Monorepo of plugins for [markdown-it.rs](https://crates.io/crates/markdown-it) t
 
 ## Development
 
+To use this crate from another Rust project before it is published to crates.io, see [docs/LOCAL_USAGE.md](./docs/LOCAL_USAGE.md).
+
 ```sh
 # fmt
 $ cargo fmt
@@ -19,8 +21,11 @@ $ cargo test -- --nocapture
 
 # docs
 $ cargo doc --open
+```
 
-# publish
+## Publish
+
+```
 $ cd ./crates/<crate_name>
 $ cargo publish --list
 $ cargo publish --dry-run
