@@ -27,8 +27,8 @@ $ cargo doc --open
 
 ```
 $ cd ./crates/<crate_name>
-$ cargo publish --list
 $ cargo publish --dry-run
+$ cargo package --list
 $ cargo login
 $ cargo publish
 ```
