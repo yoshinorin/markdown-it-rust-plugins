@@ -1,0 +1,10 @@
+[package]
+name = "interop-tests"
+version = "0.0.0"
+publish = false
+edition = { workspace = true }
+
+[dev-dependencies]
+markdown-it = { workspace = true }
+markdown-it-lazyload = { path = "../markdown-it-lazyload" }
+markdown-it-image-caption = { path = "../markdown-it-image-caption" }
