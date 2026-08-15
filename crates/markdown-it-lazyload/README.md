@@ -23,11 +23,11 @@ See the [tests](./tests/lib.rs) for more examples.
 > Applies to `1.0.0` or later. In `0.1.x`, this plugin replaced the `Image` node with its own node, so it did not compose with other plugins that process the `Image` node.
 
 Since `1.0.0`, this plugin does not replace the `Image` node; it only appends a `loading` attribute to it.
-Therefore it composes with other plugins that replace the `Image` node (e.g. [markdown-it-image-caption](../markdown-it-image-caption)), as long as this plugin is registered before them:
+Therefore it composes with other plugins that process the `Image` node (e.g. [markdown-it-image-caption](../markdown-it-image-caption)). That plugin wraps rather than replaces the `Image` node, so registration order between the two does not matter:
 
 ```rs
 markdown_it_lazyload::add(&mut parser);      // adds `loading` to the Image node
-markdown_it_image_caption::add(&mut parser); // replaces the Image node (inherits its attributes)
+markdown_it_image_caption::add(&mut parser); // wraps the Image node (keeps it intact)
 ```
 
 ## Specification

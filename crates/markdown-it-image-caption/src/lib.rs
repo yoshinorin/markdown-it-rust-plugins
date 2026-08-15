@@ -10,9 +10,9 @@
 //! ```
 
 use markdown_it::{
-    parser::core::CoreRule,
-    plugins::cmark::{self, inline::image::Image},
-    MarkdownIt, Node, NodeValue,
+    parser::{core::CoreRule, extset::NodeExt},
+    plugins::cmark::inline::image::Image,
+    MarkdownIt, Node, NodeValue, Renderer,
 };
 
 struct ImageCaptionRule;
@@ -20,45 +20,45 @@ struct ImageCaptionRule;
 impl CoreRule for ImageCaptionRule {
     fn run(root: &mut Node, _: &MarkdownIt) {
         root.walk_mut(|node: &mut Node, _| {
-            if node.is::<Image>() {
-                if let Some(img) = node.cast::<cmark::inline::image::Image>() {
-                    node.replace(CaptionImage {
-                        cmark_image: Image {
-                            url: img.url.clone(),
-                            title: img.title.clone(),
-                        },
-                    })
-                }
+            // Skip nodes this rule already wrapped, otherwise walk_mut would
+            // descend into the newly added child and wrap it again.
+            if node.ext.contains::<Captioned>() {
+                return;
+            }
+
+            let has_src = node
+                .cast::<Image>()
+                .is_some_and(|img| !img.url.trim().is_empty());
+            let has_description = !node.children.is_empty();
+
+            if has_src && has_description {
+                node.ext.insert(Captioned);
+                let image = std::mem::take(node);
+                *node = Node::new(CaptionImage);
+                node.children.push(image);
             }
         });
     }
 }
 
 #[derive(Debug)]
-pub struct CaptionImage {
-    pub cmark_image: Image,
-}
+struct Captioned;
+
+impl NodeExt for Captioned {}
+
+/// Wraps an `Image` node, keeping it intact as its only child instead of
+/// replacing it, so plugins that inspect `Image` nodes directly (e.g.
+/// `markdown-it-lazyload`) keep working regardless of registration order.
+#[derive(Debug)]
+pub struct CaptionImage;
 
 impl NodeValue for CaptionImage {
-    fn render(&self, node: &markdown_it::Node, fmt: &mut dyn markdown_it::Renderer) {
-        let mut attrs = node.attrs.clone();
-        let has_src = !self.cmark_image.url.trim().is_empty();
-        let has_description = !node.children.is_empty();
+    fn render(&self, node: &Node, fmt: &mut dyn Renderer) {
+        fmt.contents(&node.children);
 
-        attrs.push(("src", self.cmark_image.url.clone()));
-        attrs.push(("alt", node.collect_text()));
-
-        if let Some(title) = &self.cmark_image.title {
-            attrs.push(("title", title.clone()));
-        }
-
-        fmt.self_close("img", &attrs);
-
-        if has_src && has_description {
-            fmt.open("sub", &[]);
-            fmt.contents(&node.children);
-            fmt.close("sub");
-        }
+        fmt.open("sub", &[]);
+        fmt.contents(&node.children[0].children);
+        fmt.close("sub");
     }
 }
 

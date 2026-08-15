@@ -1,9 +1,6 @@
 use markdown_it::MarkdownIt;
 use std::sync::LazyLock;
 
-// lazyload must be registered before image-caption because image-caption
-// replaces the `Image` node (inheriting its attributes), while lazyload
-// only appends a `loading` attribute to the `Image` node.
 static WITH_LAZYLOAD_MARKDOWN_IT: LazyLock<MarkdownIt> = LazyLock::new(|| {
     let mut mdit = markdown_it::MarkdownIt::new();
     markdown_it::plugins::cmark::add(&mut mdit);

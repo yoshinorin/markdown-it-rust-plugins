@@ -48,16 +48,18 @@ For example, `![*italic*](img.jpg)` renders `alt="italic"` (plain text) but `<su
 
 ## Interoperability
 
-This plugin replaces the `Image` node with its own node, inheriting the attributes already attached to it.
-Plugins that only append attributes to the `Image` node (e.g. [markdown-it-lazyload](../markdown-it-lazyload) `1.0.0` or later) compose with this plugin, as long as they are registered **before** it:
+This plugin wraps the `Image` node instead of replacing it, keeping it intact as a child of the wrapper.
+Plugins that inspect or append attributes to `Image` nodes (e.g. [markdown-it-lazyload](../markdown-it-lazyload)) compose with this plugin regardless of registration order:
 
 ```rs
 markdown_it_lazyload::add(&mut parser);      // adds `loading` to the Image node
-markdown_it_image_caption::add(&mut parser); // replaces the Image node (inherits its attributes)
+markdown_it_image_caption::add(&mut parser); // wraps the Image node (keeps it intact)
 
 parser.parse("![Rust](img.jpg)").render();
 // <p><img loading="lazy" src="img.jpg" alt="Rust"><sub>Rust</sub></p>
 ```
+
+The same output is produced if the two `add()` calls are swapped.
 
 ## Specification
 
