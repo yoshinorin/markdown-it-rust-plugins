@@ -7,55 +7,21 @@
 //! let node = parser.parse("![Rust](https://example.com/example.png)");
 //! ```
 
-use markdown_it::{
-    parser::core::CoreRule,
-    plugins::cmark::{self, inline::image::Image},
-    MarkdownIt, Node, NodeValue,
-};
+use markdown_it::{parser::core::CoreRule, plugins::cmark::inline::image::Image, MarkdownIt, Node};
 
 struct LazyLoadImageRule;
 
 impl CoreRule for LazyLoadImageRule {
     fn run(root: &mut Node, _: &MarkdownIt) {
         root.walk_mut(|node: &mut Node, _| {
-            if node.is::<Image>() {
-                if let Some(img) = node.cast::<cmark::inline::image::Image>() {
-                    node.replace(LazyLoadImage {
-                        cmark_image: Image {
-                            url: img.url.clone(),
-                            title: img.title.clone(),
-                        },
-                        loading: "lazy".to_string(),
-                    })
-                }
+            let has_src = node
+                .cast::<Image>()
+                .is_some_and(|img| !img.url.trim().is_empty());
+
+            if has_src {
+                node.attrs.push(("loading", "lazy".to_string()));
             }
         });
-    }
-}
-
-#[derive(Debug)]
-pub struct LazyLoadImage {
-    pub cmark_image: Image,
-    pub loading: String,
-}
-
-impl NodeValue for LazyLoadImage {
-    // https://github.com/markdown-it-rust/markdown-it/blob/2d7c085046a144d221490331b25ca565ecddbb1b/src/plugins/cmark/inline/image.rs#L16
-    fn render(&self, node: &markdown_it::Node, fmt: &mut dyn markdown_it::Renderer) {
-        let mut attrs = node.attrs.clone();
-
-        attrs.push(("src", self.cmark_image.url.clone()));
-        attrs.push(("alt", node.collect_text()));
-
-        if let Some(title) = &self.cmark_image.title {
-            attrs.push(("title", title.clone()));
-        }
-
-        if !self.cmark_image.url.trim().is_empty() {
-            attrs.push(("loading", self.loading.clone()));
-        }
-
-        fmt.self_close("img", &attrs);
     }
 }
 

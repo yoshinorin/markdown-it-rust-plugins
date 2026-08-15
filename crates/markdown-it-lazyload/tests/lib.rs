@@ -25,7 +25,7 @@ static ADDED_LAZYLOAD_RULE_BEFORE_CMARK_MARKDOWN_IT: LazyLock<MarkdownIt> = Lazy
 fn test_inline_full_url_render() {
     let input = r#"![Rust](https://example.com/example.png)"#;
     let out = MARKDOWN_IT.parse(input).render();
-    let expected = r#"<p><img src="https://example.com/example.png" alt="Rust" loading="lazy"></p>
+    let expected = r#"<p><img loading="lazy" src="https://example.com/example.png" alt="Rust"></p>
 "#;
 
     assert_eq!(out, expected);
@@ -35,7 +35,7 @@ fn test_inline_full_url_render() {
 fn test_title_render() {
     let input = r#"![Rust](https://example.com/example.png 'img_title')"#;
     let out = MARKDOWN_IT.parse(input).render();
-    let expected = r#"<p><img src="https://example.com/example.png" alt="Rust" title="img_title" loading="lazy"></p>
+    let expected = r#"<p><img loading="lazy" src="https://example.com/example.png" alt="Rust" title="img_title"></p>
 "#;
 
     assert_eq!(out, expected);
@@ -47,7 +47,7 @@ fn test_add_plugin_before_cmark_render() {
     let out = ADDED_LAZYLOAD_RULE_BEFORE_CMARK_MARKDOWN_IT
         .parse(input)
         .render();
-    let expected = r#"<p><img src="https://example.com/example.png" alt="Rust" loading="lazy"></p>
+    let expected = r#"<p><img loading="lazy" src="https://example.com/example.png" alt="Rust"></p>
 "#;
 
     assert_eq!(out, expected);
@@ -57,7 +57,7 @@ fn test_add_plugin_before_cmark_render() {
 fn test_inline_relative_url_render() {
     let input = r#"![Rust](./example.png)"#;
     let out = MARKDOWN_IT.parse(input).render();
-    let expected = r#"<p><img src="./example.png" alt="Rust" loading="lazy"></p>
+    let expected = r#"<p><img loading="lazy" src="./example.png" alt="Rust"></p>
 "#;
 
     assert_eq!(out, expected);
@@ -88,11 +88,11 @@ hoge
 
     let out = MARKDOWN_IT.parse(input).render();
     let expected = r#"<h2>H2 Title</h2>
-<p><img src="https://example.com/example1.png" alt="" loading="lazy">
+<p><img loading="lazy" src="https://example.com/example1.png" alt="">
 foobar
-<img src="https://example.net/example2.png" alt="" loading="lazy">
+<img loading="lazy" src="https://example.net/example2.png" alt="">
 hoge
-<img src="./example3.png" alt="" loading="lazy"> <img src="./../example4.png" alt="Example4" loading="lazy"></p>
+<img loading="lazy" src="./example3.png" alt=""> <img loading="lazy" src="./../example4.png" alt="Example4"></p>
 "#;
 
     assert_eq!(out, expected);
@@ -109,7 +109,7 @@ foobar
 "#;
 
     let out = MARKDOWN_IT.parse(input).render();
-    let expected = r#"<p><img src="example.rust.png" alt="Rust" title="image_title" loading="lazy"></p>
+    let expected = r#"<p><img loading="lazy" src="example.rust.png" alt="Rust" title="image_title"></p>
 <p>foobar</p>
 "#;
     assert_eq!(out, expected);
@@ -138,7 +138,7 @@ hoge
 fn test_inline_xrender() {
     let input = r#"![Rust](https://example.com/example.png)"#;
     let out = MARKDOWN_IT.parse(input).xrender();
-    let expected = r#"<p><img src="https://example.com/example.png" alt="Rust" loading="lazy" /></p>
+    let expected = r#"<p><img loading="lazy" src="https://example.com/example.png" alt="Rust" /></p>
 "#;
 
     assert_eq!(out, expected);
@@ -159,7 +159,7 @@ hoge
 <p>foobar
 hoge
 &lt;img src=&quot;raw.rust.png&quot; alt=&quot;Raw&quot; title=&quot;raw_image_title&quot;&gt;
-<img src="https://example.com/example.png" alt="Rust" loading="lazy"></p>
+<img loading="lazy" src="https://example.com/example.png" alt="Rust"></p>
 "#;
 
     assert_eq!(out, expected);
