@@ -10,7 +10,7 @@ edition = { workspace = true }
 repository = { workspace = true }
 keywords = ["markdown", "markdown-it"]
 categories = ["encoding", "parsing", "text-processing"]
-excludes = ["tests"]
+exclude = ["tests"]
 
 [dependencies]
 markdown-it = { workspace = true }
