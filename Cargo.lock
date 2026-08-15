@@ -151,7 +151,7 @@ dependencies = [
 
 [[package]]
 name = "markdown-it-image-caption"
-version = "0.1.0"
+version = "1.0.0"
 dependencies = [
  "markdown-it",
 ]
