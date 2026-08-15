@@ -114,6 +114,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "interop-tests"
+version = "0.0.0"
+dependencies = [
+ "markdown-it",
+ "markdown-it-image-caption",
+ "markdown-it-lazyload",
+]
+
+[[package]]
 name = "libc"
 version = "0.2.169"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -138,6 +147,13 @@ dependencies = [
  "regex",
  "stacker",
  "unicode-general-category",
+]
+
+[[package]]
+name = "markdown-it-image-caption"
+version = "0.1.0"
+dependencies = [
+ "markdown-it",
 ]
 
 [[package]]

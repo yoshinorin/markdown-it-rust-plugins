@@ -1,0 +1,16 @@
+[package]
+name = "markdown-it-image-caption"
+version = "0.1.0"
+description = "A markdown-it plugin that renders the image alt text as a <sub> caption following the <img> tag"
+readme = "README.md"
+license = "Apache-2.0"
+license-file = "LICENSE"
+authors = { workspace = true }
+edition = { workspace = true }
+repository = { workspace = true }
+keywords = ["markdown", "markdown-it"]
+categories = ["encoding", "parsing", "text-processing"]
+exclude = ["tests"]
+
+[dependencies]
+markdown-it = { workspace = true }
