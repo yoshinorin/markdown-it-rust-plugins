@@ -142,7 +142,7 @@ dependencies = [
 
 [[package]]
 name = "markdown-it-lazyload"
-version = "0.1.1"
+version = "1.0.0"
 dependencies = [
  "markdown-it",
 ]

@@ -12,10 +12,23 @@ markdown_it::plugins::cmark::add(parser);
 markdown_it_lazyload::add(parser);
 
 parser.parse("![Rust](https://example.com/example.png)").render();
-// <p><img src="https://example.com/example.png" alt="Rust" loading="lazy"></p>
+// <p><img loading="lazy" src="https://example.com/example.png" alt="Rust"></p>
 ```
 
 See the [tests](./tests/lib.rs) for more examples.
+
+## Interoperability
+
+> [!NOTE]
+> Applies to `1.0.0` or later. In `0.1.x`, this plugin replaced the `Image` node with its own node, so it did not compose with other plugins that process the `Image` node.
+
+Since `1.0.0`, this plugin does not replace the `Image` node; it only appends a `loading` attribute to it.
+Therefore it composes with other plugins that replace the `Image` node (e.g. [markdown-it-image-caption](../markdown-it-image-caption)), as long as this plugin is registered before them:
+
+```rs
+markdown_it_lazyload::add(&mut parser);      // adds `loading` to the Image node
+markdown_it_image_caption::add(&mut parser); // replaces the Image node (inherits its attributes)
+```
 
 ## Specification
 
