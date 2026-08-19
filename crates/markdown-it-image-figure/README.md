@@ -6,6 +6,15 @@ A [markdown-it.rs](https://crates.io/crates/markdown-it) plugin that wraps a sta
 
 `<figure>`/`<figcaption>` are not part of the CommonMark spec. This plugin is a non-standard extension.
 
+### vs. `markdown-it-image-caption`
+
+[markdown-it-image-caption](../markdown-it-image-caption) covers the same idea (image + description) using `<sub>` instead of `<figure>`/`<figcaption>`. The two plugins differ in where they apply:
+
+- `<figure>` is a block-level element, so **this** plugin only wraps an image when it is the sole content of its paragraph; an image mixed with other text is left as a plain `<img>` with no caption.
+- `<sub>` is an inline element, so `markdown-it-image-caption` captions every image, regardless of whether it shares a paragraph with other text.
+
+Pick `markdown-it-image-figure` if you want semantically correct `<figure>`/`<figcaption>` markup for standalone images, or `markdown-it-image-caption` if you want every image captioned unconditionally.
+
 ## Usage
 
 ```rs

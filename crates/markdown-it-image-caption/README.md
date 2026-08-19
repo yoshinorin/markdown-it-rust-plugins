@@ -4,6 +4,15 @@
 
 A [markdown-it.rs](https://crates.io/crates/markdown-it) plugin that renders the image description as a `<sub>` caption placed immediately after the `<img>` tag. The `alt` attribute is populated with the plain-text description per the [CommonMark](https://commonmark.org/help/tutorial/08-images.html) specification.
 
+### vs. `markdown-it-image-figure`
+
+[markdown-it-image-figure](../markdown-it-image-figure) covers the same idea (image + description) using `<figure>`/`<figcaption>` instead of `<sub>`. The two plugins differ in where they apply:
+
+- `<sub>` is an inline element, so **this** plugin captions every image, regardless of whether it shares a paragraph with other text.
+- `<figure>` is a block-level element, so `markdown-it-image-figure` only wraps an image when it is the sole content of its paragraph; an image mixed with other text is left as a plain `<img>` with no caption.
+
+Pick `markdown-it-image-caption` if you want every image captioned unconditionally, or `markdown-it-image-figure` if you want semantically correct `<figure>`/`<figcaption>` markup for standalone images.
+
 ## Usage
 
 ```rs
