@@ -8,3 +8,4 @@ edition = { workspace = true }
 markdown-it = { workspace = true }
 markdown-it-lazyload = { path = "../markdown-it-lazyload" }
 markdown-it-image-caption = { path = "../markdown-it-image-caption" }
+markdown-it-image-figure = { path = "../markdown-it-image-figure" }

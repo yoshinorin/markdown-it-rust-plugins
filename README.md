@@ -6,6 +6,7 @@ Monorepo of plugins for [markdown-it.rs](https://crates.io/crates/markdown-it) t
 
 - [markdown-it-lazyload](crates/markdown-it-lazyload/README.md)
 - [markdown-it-image-caption](crates/markdown-it-image-caption/README.md)
+- [markdown-it-image-figure](crates/markdown-it-image-figure/README.md)
 
 ## Development
 

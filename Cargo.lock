@@ -119,6 +119,7 @@ version = "0.0.0"
 dependencies = [
  "markdown-it",
  "markdown-it-image-caption",
+ "markdown-it-image-figure",
  "markdown-it-lazyload",
 ]
 
@@ -152,6 +153,13 @@ dependencies = [
 [[package]]
 name = "markdown-it-image-caption"
 version = "1.0.0"
+dependencies = [
+ "markdown-it",
+]
+
+[[package]]
+name = "markdown-it-image-figure"
+version = "0.1.0"
 dependencies = [
  "markdown-it",
 ]

@@ -1,0 +1,15 @@
+[package]
+name = "markdown-it-image-figure"
+version = "0.1.0"
+description = "A markdown-it plugin that wraps a standalone image in <figure> and renders its description as <figcaption>"
+readme = "README.md"
+license = "Apache-2.0"
+authors = { workspace = true }
+edition = { workspace = true }
+repository = { workspace = true }
+keywords = ["markdown", "markdown-it"]
+categories = ["encoding", "parsing", "text-processing"]
+exclude = ["tests"]
+
+[dependencies]
+markdown-it = { workspace = true }
